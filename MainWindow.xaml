@@ -1,0 +1,75 @@
+﻿<Window x:Class="UserForm.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UserForm"
+        mc:Ignorable="d" FontSize="20"
+        Title="MainWindow" Height="450" Width="800" Closing="Window_Closing">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="0.382*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="0.382*" />
+            <ColumnDefinition Width="5"/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="5" />
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3">
+            <Menu DockPanel.Dock="Top" Background="White">
+                <MenuItem Header="_Plik">
+                    <MenuItem x:Name="menuItemOpen" Header="_Otwórz" Click="Open" />
+                    <MenuItem x:Name="menuItemSave"  Header="_Zapisz" Click="Save" />
+                    <Separator/>
+                    <MenuItem x:Name="menuItemExit" Header="_Wyjdź" Click="Exit"  />
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        
+        <StackPanel Grid.Row="2" Grid.Column="1">
+            <Label Content="Imię"/>
+            <local:TextBoxWithErrorProvider x:Name="textBoxName" Margin="2"/>
+            
+            <Label Content="Nazwisko" />
+            <local:TextBoxWithErrorProvider x:Name="textBoxSurname" Margin="2" />
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Waga:" />
+                <Label Grid.Column="1" x:Name="TextBlockWeightValue" Content="{Binding ElementName=sliderWeight, Path=Value}" />
+            </Grid>
+            <Slider x:Name="sliderWeight" Margin="2" Maximum="150" TickFrequency="1" IsSnapToTickEnabled="True" />
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Wiek:" />
+                <Label Grid.Column="1" x:Name="TextBlockWiekValue" Content="{Binding ElementName=sliderAge, Path=Value}"/>
+            </Grid>
+            <Slider x:Name="sliderAge" Margin="2" Maximum="150" TickFrequency="1" IsSnapToTickEnabled="True" />
+        </StackPanel>
+
+        <Button Grid.Row="3" Grid.Column="1" Name="ButtonOK" Content="OK" Click="OK" Margin="2" />
+        <Button Grid.Row="4" Grid.Column="1" Name="ButtonReset" Content="Reset" Click="Reset" Margin="2" />
+
+        <ListBox x:Name="listBoxPlayers" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" BorderThickness="0">
+        </ListBox>
+
+        <Button Grid.Row="3" Grid.Column="3" Name="ButtonEdit" Content="Edytuj" Click="Edit" Margin="2"  />
+        <Button Grid.Row="4" Grid.Column="3" Name="ButtonDelete" Content="Usuń" Click="Delete" Margin="2" />
+    </Grid>
+</Window>
